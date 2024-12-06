@@ -22,24 +22,16 @@
  */
 
 #include "eventbus.h"
-#include "conf.h"
+#include "assert.h"
+#include "event_bus_test.h"
 
-typedef struct cl_event_bus_t
+int main()
 {
-  // event callbacks link list array
-  //
-  // event1 -> [callback1|next] -> [callback2|next] -> [callback3|null]
-  // event2 -> [callback1|next] -> [callback2|next] -> [callback3|null]
-  // ...
-  // event4 -> [callback1|next] -> [callback2|next] -> [callback3|null]
-  cl_event_bus_event_callback_t callbacks[CONFIG_EVENT_BUS_TOTAL_EVENTS];
-} cl_event_bus_t;
-
-void cl_event_bus_subscribe(cl_event_bus_t *event_bus, cl_event_t event, cl_event_bus_event_callback_t callback)
-{
-  event_bus->callbacks[event] = callback;
-}
-
-void cl_event_bus_unsubscribe(cl_event_bus_t *event_bus, cl_event_t event, cl_event_bus_event_callback_t callback)
-{
+  int ret = 0;
+  cl_event_bus_t *event_bus = cl_event_bus_get_array_impl();
+  event_bus->initialize(event_bus);
+  ret |= test_subscribe_should_success(event_bus);
+  ret |= test_unsubscribe_should_success(event_bus);
+  ret |= test_publish_should_success(event_bus);
+  return ret;
 }

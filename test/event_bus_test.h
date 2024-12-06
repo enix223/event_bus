@@ -21,21 +21,20 @@
  * IN THE SOFTWARE.
  */
 
-#ifndef CL_EVENT_BUS_CONF_H_
-#define CL_EVENT_BUS_CONF_H_
+#ifndef CL_EVENT_BUS_TEST_H_
+#define CL_EVENT_BUS_TEST_H_
 
-/**
- * @brief How many total events does the event bus support
- */
-#ifndef CONFIG_EVENT_BUS_TOTAL_EVENTS
-#define CONFIG_EVENT_BUS_TOTAL_EVENTS (10)
-#endif
+typedef enum
+{
+  CL_TEST_EVENT_SLEEP,
 
-/**
- * @brief The maximum number of callbacks for each event
- */
-#ifndef CONFIG_EVENT_BUS_MAX_EVENT_CALLBACKS_PER_EVENT
-#define CONFIG_EVENT_BUS_MAX_EVENT_CALLBACKS_PER_EVENT (10)
-#endif
+  CL_TEST_EVENT_AWAKE,
+} cl_test_event_t;
+
+int test_subscribe_should_success(cl_event_bus_t *event_bus);
+
+int test_unsubscribe_should_success(cl_event_bus_t *event_bus);
+
+int test_publish_should_success(cl_event_bus_t *event_bus);
 
 #endif
