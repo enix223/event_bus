@@ -25,7 +25,7 @@ Event bus implementation in pure C
     } cl_test_event_t;
     ```
 
-2. Get and event bus implementation
+2. Get event bus implementation instance
 
     ```c
     cl_event_bus_t *event_bus = cl_event_bus_get_array_impl();
